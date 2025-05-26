@@ -1,23 +1,18 @@
 <?php include 'connect.php'; ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <body>
     <?php
+      $category_id = $_SESSION['category_id'];
+
         if($_POST){
           $date = $_POST['date'];
           $des = $_POST['des'];
           $amount = $_POST['amount'];
+          $percentage = $_POST['percentage'];
 
-          $opening_balancestmt = $pdo->prepare("SELECT * FROM opening_balances WHERE date='$date'");
+          $opening_balancestmt = $pdo->prepare("SELECT * FROM opening_balances WHERE date='$date' AND category_id='$category_id'");
           $opening_balancestmt->execute();
           $opening_balancedatas = $opening_balancestmt->fetch(PDO::FETCH_ASSOC);
 
-          $balancestmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' ORDER BY id DESC");
+          $balancestmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' AND category_id='$category_id' ORDER BY id DESC");
           $balancestmt->execute();
           $balancedatas = $balancestmt->fetch(PDO::FETCH_ASSOC);
 
@@ -32,10 +27,33 @@
           }
 
 
-          $stmt = $pdo->prepare("INSERT INTO cashbook (date,description,out_amt,balance) VALUES ('$date','$des','$amount','$balance')");
+          $stmt = $pdo->prepare("INSERT INTO cashbook (date,description,out_amt,balance,category_id) VALUES ('$date','$des','$amount','$balance','$category_id')");
           $query = $stmt->execute();
+
+          $cash_idstmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' ORDER BY id DESC");
+          $cash_idstmt->execute();
+          $cash_datas = $cash_idstmt->fetch(PDO::FETCH_ASSOC);
+          $cash_id = $cash_datas['id'];
+          $percentage_amt = ($amount / 100) * $percentage;
+
+          $stmt = $pdo->prepare("INSERT INTO percentage (date,description,percentage,percentage_amt,category_id,cash_id) VALUES ('$date','$des','$percentage','$percentage_amt','$category_id','$cash_id')");
+          $query = $stmt->execute();
+
           if ($query) {
-              echo "<script>alert('Added successfully !'); window.location.href='index.php'</script>";
+              echo "
+              <script>
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Added!',
+                      text: 'Cash in Added Successfully',
+                      confirmButtonText: 'Ok'
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          window.location.href = 'cashbook.php';
+                      }
+                  });
+              </script>
+              ";
           }else{
             echo "<script>alert('Added failed !!')</script>";
           }
@@ -43,30 +61,33 @@
      ?>
       <div class="container mt-5 w-50">
         <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-10">
-                <h2>Add Your Cash Out Bill </h2>
-              </div>
-              <div class="col-1">
-                <a href="index.php"><button type="button" name="button" class="btn btn-danger">Back</button></a>
-              </div>
-            </div>
+          <div class="card-header pt-3 pb-3">
+            <h3>ငွေထုတ်မှတ်တမ်းထည့်သွင်းရန်</h3>
           </div>
           <div class="card-body">
             <form class="" action="out.php" method="post">
-              <h4><label>Date</label></h4>
+              <h5><label>ရက်စွဲ</label></h5>
               <input type="date" name="date" value="" class="form-control mb-3">
-              <h4><label>Description</label></h4>
+              <h5><label>အကြောင်းအရာ</label></h5>
               <input type="text" name="des" value="" class="form-control mb-3">
-              <h4><label>Amount</label></h4>
-              <input type="number" name="amount" value="" class="form-control mb-3">
+              <div class="d-flex gap-3">
+                <div class="col">
+                  <h5><label>ပမာဏ</label></h5>
+                  <input type="number" name="amount" value="" class="form-control mb-3">
+                </div>
+                <div class="col">
+                  <h5><label>ဝန်ဆောင်ခ( % )</label></h5>
+                  <input type="number" name="percentage" value="3" class="form-control mb-3">
+                </div>
+              </div>
           </div>
-          <div class="card-footer">
-            <button type="submit" name="button" class="btn btn-primary form-control mt-1 mb-1">Save</button>
+          <div class="card-footer pt-3 pb-3">
+            <div class="float-end">
+              <a href="cashbook.php"><button type="button" name="button" class="btn btn-danger">Back</button></a>
+              <button type="submit" name="button" class="btn btn-primary ms-1">Save</button>
+              </div>
           </div>
         </form>
         </div>
       </div>
-  </body>
-</html>
+<?php include 'footer.php'; ?>
