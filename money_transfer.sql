@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2025 at 05:43 AM
+-- Generation Time: May 27, 2025 at 02:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,13 +43,21 @@ CREATE TABLE `cashbook` (
 --
 
 INSERT INTO `cashbook` (`id`, `date`, `description`, `in_amt`, `out_amt`, `balance`, `category_id`, `created_at`) VALUES
-(46, '2025-05-26', ' sfdjsdkfjksa', 20000, 0, 25000, 3, '2025-05-26 12:33:55'),
-(47, '2025-05-26', 'Got Pocket Money', 20000, 0, 70000, 1, '2025-05-26 12:20:32'),
-(48, '2025-05-26', 'Found Change', 10000, 0, 80000, 1, '2025-05-26 12:20:53'),
-(49, '2025-05-26', 'buy food', 0, 5000, 75000, 1, '2025-05-26 12:25:50'),
-(50, '2025-05-26', 'fhghg', 15000, 0, 90000, 1, '2025-05-26 12:25:50'),
-(51, '2025-05-26', 'Buy Shirt', 0, 40000, 50000, 1, '2025-05-26 12:25:50'),
-(52, '2025-05-26', 'Buy Shirt', 0, 2000, 23000, 3, '2025-05-26 12:33:56');
+(53, '2025-05-27', 'Got Pocket Money', 15000, 0, 35000, 3, '2025-05-27 11:32:01'),
+(54, '2025-05-27', 'Found Change', 5000, 0, 40000, 3, '2025-05-27 11:32:26'),
+(55, '2025-05-27', 'buy food', 0, 10000, 30000, 3, '2025-05-27 11:32:42'),
+(56, '2025-05-25', ' js klfjsdkl jfsldk', 0, 20000, 80000, 3, '2025-05-27 11:53:51'),
+(57, '2025-05-25', 'buy drinks', 0, 2000, 78000, 3, '2025-05-27 11:54:17'),
+(58, '2025-05-25', 'Buy jeans', 0, 45000, 33000, 3, '2025-05-27 11:55:50'),
+(59, '2025-05-25', 'got Change', 2000, 0, 35000, 3, '2025-05-27 11:56:08'),
+(60, '2025-05-26', ' fsjs klfjs', 20000, 0, 50000, 1, '2025-05-27 11:57:10'),
+(61, '2025-05-26', 'kjskdlfjsf', 0, 10000, 40000, 1, '2025-05-27 11:57:26'),
+(62, '2025-05-26', 'popo pop oo', 5000, 0, 45000, 1, '2025-05-27 11:57:43'),
+(63, '2025-05-26', 'sdjflks fjsl ', 0, 25000, 20000, 1, '2025-05-27 11:58:07'),
+(64, '2025-05-27', 'Got Pocket Money', 50000, 0, 51000, 1, '2025-05-27 11:59:06'),
+(65, '2025-05-27', 'dfdsfsdfsd', 13000, 0, 64000, 1, '2025-05-27 11:59:27'),
+(66, '2025-05-27', 'Found Change', 6000, 0, 70000, 1, '2025-05-27 11:59:56'),
+(67, '2025-05-27', 'Buy Book', 0, 20000, 50000, 1, '2025-05-27 12:00:09');
 
 -- --------------------------------------------------------
 
@@ -70,8 +78,10 @@ CREATE TABLE `opening_balances` (
 --
 
 INSERT INTO `opening_balances` (`id`, `date`, `description`, `opening_amt`, `category_id`) VALUES
-(4, '2025-05-26', 'Opening Balance For 26-5-25', 50000, 1),
-(5, '2025-05-26', 'Opening Balance For 26-5-25', 5000, 3);
+(6, '2025-05-27', 'Opening Balance For 27-5-25', 20000, 3),
+(7, '2025-05-25', 'Opening Balance For 25-5-25', 100000, 3),
+(8, '2025-05-26', 'Opening Balance For 26-5-25', 30000, 1),
+(9, '2025-05-27', 'Opening Balance For 27-5-25', 1000, 1);
 
 -- --------------------------------------------------------
 
@@ -106,6 +116,7 @@ CREATE TABLE `percentage` (
   `description` varchar(255) NOT NULL,
   `percentage` int(11) NOT NULL,
   `percentage_amt` int(11) NOT NULL,
+  `inorout` varchar(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `cash_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -114,14 +125,22 @@ CREATE TABLE `percentage` (
 -- Dumping data for table `percentage`
 --
 
-INSERT INTO `percentage` (`id`, `date`, `description`, `percentage`, `percentage_amt`, `category_id`, `cash_id`) VALUES
-(12, '2025-05-26', ' sfdjsdkfjksa', 3, 600, 3, 46),
-(13, '2025-05-26', 'Got Pocket Money', 3, 600, 1, 47),
-(14, '2025-05-26', 'Found Change', 3, 300, 1, 48),
-(15, '2025-05-26', 'buy food', 3, 150, 1, 49),
-(16, '2025-05-26', 'fhghg', 3, 450, 1, 50),
-(17, '2025-05-26', 'Buy Shirt', 3, 1200, 1, 51),
-(18, '2025-05-26', 'Buy Shirt', 3, 60, 3, 52);
+INSERT INTO `percentage` (`id`, `date`, `description`, `percentage`, `percentage_amt`, `inorout`, `category_id`, `cash_id`) VALUES
+(19, '2025-05-27', 'Got Pocket Money', 3, 450, 'in', 3, 53),
+(20, '2025-05-27', 'Found Change', 3, 150, 'in', 3, 54),
+(21, '2025-05-27', 'buy food', 3, 300, 'out', 3, 55),
+(22, '2025-05-25', ' js klfjsdkl jfsldk', 3, 600, 'out', 3, 56),
+(23, '2025-05-25', 'buy drinks', 3, 60, 'out', 3, 57),
+(24, '2025-05-25', 'Buy jeans', 3, 1350, 'out', 3, 58),
+(25, '2025-05-25', 'got Change', 3, 60, 'in', 3, 59),
+(26, '2025-05-26', ' fsjs klfjs', 3, 600, 'in', 1, 60),
+(27, '2025-05-26', 'kjskdlfjsf', 3, 300, 'out', 1, 61),
+(28, '2025-05-26', 'popo pop oo', 3, 150, 'in', 1, 62),
+(29, '2025-05-26', 'sdjflks fjsl ', 3, 750, 'out', 1, 63),
+(30, '2025-05-27', 'Got Pocket Money', 3, 1500, 'in', 1, 64),
+(31, '2025-05-27', 'dfdsfsdfsd', 3, 390, 'in', 1, 65),
+(32, '2025-05-27', 'Found Change', 3, 180, 'in', 1, 66),
+(33, '2025-05-27', 'Buy Book', 3, 600, 'out', 1, 67);
 
 --
 -- Indexes for dumped tables
@@ -159,13 +178,13 @@ ALTER TABLE `percentage`
 -- AUTO_INCREMENT for table `cashbook`
 --
 ALTER TABLE `cashbook`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `opening_balances`
 --
 ALTER TABLE `opening_balances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `payment_categories`
@@ -177,7 +196,7 @@ ALTER TABLE `payment_categories`
 -- AUTO_INCREMENT for table `percentage`
 --
 ALTER TABLE `percentage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

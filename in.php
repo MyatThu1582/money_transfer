@@ -37,7 +37,7 @@
           $cash_id = $cash_datas['id'];
           $percentage_amt = ($amount / 100) * $percentage;
 
-          $stmt = $pdo->prepare("INSERT INTO percentage (date,description,percentage,percentage_amt,category_id,cash_id) VALUES ('$date','$des','$percentage','$percentage_amt','$category_id','$cash_id')");
+          $stmt = $pdo->prepare("INSERT INTO percentage (date,description,percentage,percentage_amt,inorout,category_id,cash_id) VALUES ('$date','$des','$percentage','$percentage_amt','in','$category_id','$cash_id')");
           $query = $stmt->execute();
 
           if ($query) {

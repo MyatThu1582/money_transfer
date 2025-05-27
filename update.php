@@ -49,6 +49,7 @@
                 }
               }
               $stmt = $pdo->prepare("UPDATE cashbook SET date ='$date', description ='$des', in_amt='$amount', out_amt='0', balance='$balance', category_id='$category_id' WHERE id=$id");
+              $percentagestmt = $pdo->prepare("UPDATE percentage SET percentage = '$percentage',percentage_amt = '$percentage_amt', inorout = 'in' WHERE cash_id=$id");
             }elseif($inorout == 'out'){
               if(!empty($balancedatas)){
                 $balance = $balancedatas['balance'] - $amount;
@@ -60,13 +61,13 @@
                 }
               }
               $stmt = $pdo->prepare("UPDATE cashbook SET date ='$date', description ='$des', in_amt='0', out_amt='$amount', balance='$balance', category_id='$category_id' WHERE id=$id");
+              $percentagestmt = $pdo->prepare("UPDATE percentage SET percentage = '$percentage',percentage_amt = '$percentage_amt', inorout = 'out' WHERE cash_id=$id");
             }
             $stmt->execute();
+            $percentagestmt->execute();
 
             $percentage_amt = ($amount / 100) * $percentage;
 
-            $percentagestmt = $pdo->prepare("UPDATE percentage SET percentage = '$percentage',percentage_amt = '$percentage_amt' WHERE cash_id=$id");
-            $percentagestmt->execute();
 
 
 

@@ -73,7 +73,7 @@ if(isset($_POST['addpayment'])){
         </button>
         <ul class="dropdown-menu shadow mt-2 p-2">
             <li>
-            <a class="dropdown-item rounded mb-1" href="report.php?report=cash_in_percentage">ငွေလွှဲဝန်ဆောင်ခ</a>
+            <a class="dropdown-item rounded mb-1" href="report.php?report=cash_in_percentage">ငွေသွင်းဝန်ဆောင်ခ</a>
             </li>
             <li>
             <a class="dropdown-item rounded mb-1 border-top pt-2" href="report.php?report=cash_out_percentage">ငွေထုတ်ဝန်ဆောင်ခ</a>
@@ -82,7 +82,7 @@ if(isset($_POST['addpayment'])){
             <a class="dropdown-item rounded mb-1 border-top pt-2" href="report.php?report=total_cash_in">ငွေဝင်စာရင်း</a>
             </li>
             <li>
-            <a class="dropdown-item rounded border-top pt-2" href="report.php?report=total_cash_out">ငွေထုတ်စာရင်း</a>
+            <a class="dropdown-item rounded border-top pt-2" href="report.php?report=total_cash_out">ထွက်ငွေစာရင်း</a>
             </li>
         </ul>
         </div>
