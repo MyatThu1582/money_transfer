@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2025 at 02:47 PM
+-- Generation Time: May 28, 2025 at 03:06 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,9 +43,9 @@ CREATE TABLE `cashbook` (
 --
 
 INSERT INTO `cashbook` (`id`, `date`, `description`, `in_amt`, `out_amt`, `balance`, `category_id`, `created_at`) VALUES
-(53, '2025-05-27', 'Got Pocket Money', 15000, 0, 35000, 3, '2025-05-27 11:32:01'),
-(54, '2025-05-27', 'Found Change', 5000, 0, 40000, 3, '2025-05-27 11:32:26'),
-(55, '2025-05-27', 'buy food', 0, 10000, 30000, 3, '2025-05-27 11:32:42'),
+(53, '2025-05-27', 'Got Pocket Money', 15000, 0, 50000, 3, '2025-05-28 11:10:37'),
+(54, '2025-05-27', 'Found Change', 5000, 0, 55000, 3, '2025-05-28 11:10:48'),
+(55, '2025-05-27', 'buy food', 0, 10000, 45000, 3, '2025-05-28 11:10:55'),
 (56, '2025-05-25', ' js klfjsdkl jfsldk', 0, 20000, 80000, 3, '2025-05-27 11:53:51'),
 (57, '2025-05-25', 'buy drinks', 0, 2000, 78000, 3, '2025-05-27 11:54:17'),
 (58, '2025-05-25', 'Buy jeans', 0, 45000, 33000, 3, '2025-05-27 11:55:50'),
@@ -54,10 +54,10 @@ INSERT INTO `cashbook` (`id`, `date`, `description`, `in_amt`, `out_amt`, `balan
 (61, '2025-05-26', 'kjskdlfjsf', 0, 10000, 40000, 1, '2025-05-27 11:57:26'),
 (62, '2025-05-26', 'popo pop oo', 5000, 0, 45000, 1, '2025-05-27 11:57:43'),
 (63, '2025-05-26', 'sdjflks fjsl ', 0, 25000, 20000, 1, '2025-05-27 11:58:07'),
-(64, '2025-05-27', 'Got Pocket Money', 50000, 0, 51000, 1, '2025-05-27 11:59:06'),
-(65, '2025-05-27', 'dfdsfsdfsd', 13000, 0, 64000, 1, '2025-05-27 11:59:27'),
-(66, '2025-05-27', 'Found Change', 6000, 0, 70000, 1, '2025-05-27 11:59:56'),
-(67, '2025-05-27', 'Buy Book', 0, 20000, 50000, 1, '2025-05-27 12:00:09');
+(64, '2025-05-27', 'Got Pocket Money', 50000, 0, 70000, 1, '2025-05-28 11:09:13'),
+(65, '2025-05-27', 'dfdsfsdfsd', 13000, 0, 83000, 1, '2025-05-28 11:09:27'),
+(66, '2025-05-27', 'Found Change', 6000, 0, 89000, 1, '2025-05-28 11:09:35'),
+(67, '2025-05-27', 'Buy Book', 0, 20000, 69000, 1, '2025-05-28 11:09:48');
 
 -- --------------------------------------------------------
 
@@ -78,10 +78,10 @@ CREATE TABLE `opening_balances` (
 --
 
 INSERT INTO `opening_balances` (`id`, `date`, `description`, `opening_amt`, `category_id`) VALUES
-(6, '2025-05-27', 'Opening Balance For 27-5-25', 20000, 3),
+(6, '2025-05-27', 'Opening Balance For 27-5-25', 35000, 3),
 (7, '2025-05-25', 'Opening Balance For 25-5-25', 100000, 3),
 (8, '2025-05-26', 'Opening Balance For 26-5-25', 30000, 1),
-(9, '2025-05-27', 'Opening Balance For 27-5-25', 1000, 1);
+(9, '2025-05-27', 'Opening Balance For 27-5-25', 20000, 1);
 
 -- --------------------------------------------------------
 
@@ -91,18 +91,19 @@ INSERT INTO `opening_balances` (`id`, `date`, `description`, `opening_amt`, `cat
 
 CREATE TABLE `payment_categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `payment_categories`
 --
 
-INSERT INTO `payment_categories` (`id`, `name`) VALUES
-(1, 'KBZ Pay'),
-(2, 'WAVE Pay'),
-(3, 'AYA Pay'),
-(4, 'CB Pay');
+INSERT INTO `payment_categories` (`id`, `name`, `image`) VALUES
+(1, 'KBZ Pay', 'kbz2.jpg'),
+(2, 'WAVE Pay', 'wave.jpg'),
+(3, 'AYA Pay', 'aya.jpg'),
+(4, 'CB Pay', 'cb.png');
 
 -- --------------------------------------------------------
 
