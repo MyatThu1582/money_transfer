@@ -65,7 +65,7 @@ if(isset($_POST['addpayment'])){
   <div class="container mt-5">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-5">
-      <h2 class="mb-0">Choose Your Payment</h2>
+      <h2 class="mb-0">ငွေလွှဲအမျိုးအစားရွေးချယ်ရန်</h2>
       <div class="d-flex col-3">
       <div class="dropdown col">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
@@ -83,6 +83,12 @@ if(isset($_POST['addpayment'])){
             </li>
             <li>
             <a class="dropdown-item rounded border-top pt-2" href="report.php?report=total_cash_out">ထွက်ငွေစာရင်း</a>
+            </li>
+            <li>
+            <a class="dropdown-item rounded border-top pt-2" href="report.php?report=total_cash_in_out">ငွေအဝင်/အထွက်စာရင်း</a>
+            </li>
+            <li>
+            <a class="dropdown-item rounded border-top pt-2" href="report.php?report=balance">လက်ကျန်ငွေစာရင်း</a>
             </li>
         </ul>
         </div>
@@ -106,12 +112,14 @@ if(isset($_POST['addpayment'])){
                 <form action="" method="post">
                     <input type="hidden" value="<?php echo $data['id']; ?>" name="category_id">
                     <button class="btn btn-light" type="submit" name="tocashbook">
-                        <div class="card shadow-sm text-center p-3">
-                        <div class="card-body">
-                        <h5 class="card-title"><?php echo $data['name']; ?></h5>
-                        <p class="card-text text-muted">This is the first card.</p>
+                        <div class="card shadow-sm text-center mb-1">
+                            <div class="card-body">
+                                <div class="" style="width: 150px; height: 100px;">
+                                    <img src="images/<?php echo $data['image']; ?>" alt="" width="100%" height="100%" style="object-fit: cover;">
+                                </div>
+                            </div>
                         </div>
-                        </div>
+                    <h5 class="card-title"><?php echo $data['name']; ?></h5>
                     </button>
                 </form>
             </div>
