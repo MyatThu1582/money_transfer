@@ -26,8 +26,21 @@ if(isset($_POST['addpayment'])){
     }else{
         $file = 'images/'.($_FILES['image']['name']);
         $imageType = pathinfo($file,PATHINFO_EXTENSION);
-        if ($imageType != 'png' && $imageType != 'jpg' && $imageType != 'jpeg') {
-            echo "<script>alert('Image must be PNG, JPG, JPEG');</script>";
+        if ($imageType != 'png' && $imageType != 'jpg' && $imageType != 'jpeg' && $imageType != 'webp') {
+            echo "
+                <script>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Wrong Type',
+                        text: 'Image must be PNG, JPG, JPEG',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'index.php';
+                        }
+                    });
+                </script>
+                ";
         }else{
               move_uploaded_file($_FILES['image']['tmp_name'],$file);
               $name = $_POST['name'];
@@ -66,8 +79,9 @@ if(isset($_POST['addpayment'])){
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-5">
       <h2 class="mb-0">ငွေလွှဲအမျိုးအစားရွေးချယ်ရန်</h2>
-      <div class="d-flex col-3">
-      <div class="dropdown col">
+      <div class="d-flex col-5 text-right">
+        <div class="col-2 ms-2"></div>
+      <div class="dropdown col-4 ps-4 float-end">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
             Reporting
         </button>
@@ -94,7 +108,7 @@ if(isset($_POST['addpayment'])){
         </div>
 
         <div class="col">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPaymentModal">+ Create New</button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPaymentModal">+ အမျိုးအစားအသစ်ထည့်ရန်</button>
         </div>
       </div>
     </div>
@@ -108,18 +122,18 @@ if(isset($_POST['addpayment'])){
 
             foreach($datas as $data){
         ?> 
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-5 col-lg-2 mb-3">
                 <form action="" method="post">
                     <input type="hidden" value="<?php echo $data['id']; ?>" name="category_id">
                     <button class="btn btn-light" type="submit" name="tocashbook">
                         <div class="card shadow-sm text-center mb-1">
                             <div class="card-body">
-                                <div class="" style="width: 150px; height: 100px;">
+                                <div class="" style="width: 100px; height: 100px;">
                                     <img src="images/<?php echo $data['image']; ?>" alt="" width="100%" height="100%" style="object-fit: cover;">
                                 </div>
                             </div>
                         </div>
-                    <h5 class="card-title"><?php echo $data['name']; ?></h5>
+                    <h6 class="card-title"><?php echo $data['name']; ?></h6>
                     </button>
                 </form>
             </div>

@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <title></title>
   </head>
+  <style>
+    .scroll{
+      overflow-y: auto;
+      height: 228px;
+    }
+  </style>
 <?php
 define('MYSQL_USER','root');
 define('MYSQL_PASSWORD','');

@@ -85,9 +85,9 @@
         $cash_in_percentagestmt->execute();
         $cash_in_percentagedatas = $cash_in_percentagestmt->fetchAll();
     ?>
-    <div class="table-responsive">
+    <div class="table-responsive scroll mb-3">
         <table class="table table-bordered table-hover align-middle">
-          <thead class="table-light">
+          <thead class="table-light sticky-top">
             <tr>
                 <th class="text-center">စဥ်</th>
                 <th class="text-center">ရက်စွဲ</th>
@@ -127,6 +127,7 @@
             <!-- More rows -->
           </tbody>
         </table>
+      </div>
         <?php 
         // Payment Categories, Start Date, End Date
           if(isset($_POST['filter']) && !empty($_POST['start_date']) && !empty($_POST['end_date']) && !empty($_POST['payment_category'])){
@@ -153,11 +154,10 @@
           <thead class="table-light">
             <tr>
                 <th class="text-center">စုစုပေါင်းငွေသွင်းဝန်ဆောင်ခ</th>
-                <th class="text-center" style="width: 150px;"><?php echo $total_percentagedatas['total_percentage_amt']; ?></th>
+                <th class="text-center" style="width: 165px;"><?php echo $total_percentagedatas['total_percentage_amt']; ?></th>
             </tr>
           </thead>
         </table>
-      </div>
     
     <?php
     // Cash Out Percentage Report
@@ -184,9 +184,9 @@
         $cash_out_percentagestmt->execute();
         $cash_out_percentagedatas = $cash_out_percentagestmt->fetchAll();
     ?>
-    <div class="table-responsive">
+    <div class="table-responsive scroll mb-3">
         <table class="table table-bordered table-hover align-middle">
-          <thead class="table-light">
+          <thead class="table-light sticky-top">
             <tr>
                 <th class="text-center">စဥ်</th>
                 <th class="text-center">ရက်စွဲ</th>
@@ -227,6 +227,7 @@
             <!-- More rows -->
           </tbody>
         </table>
+      </div>
         <?php
         // Payment Categories, Start Date, End Date
           if(isset($_POST['filter']) && !empty($_POST['start_date']) && !empty($_POST['end_date']) && !empty($_POST['payment_category'])){
@@ -257,7 +258,6 @@
             </tr>
           </thead>
         </table>
-      </div>
     
     <?php
     // Total Cash In Amount Report
@@ -284,9 +284,9 @@
         $total_cash_instmt->execute();
         $total_cash_indatas = $total_cash_instmt->fetchAll();
     ?>
-    <div class="table-responsive">
+    <div class="table-responsive scroll mb-3">
         <table class="table table-bordered table-hover align-middle">
-          <thead class="table-light">
+          <thead class="table-light sticky-top">
             <tr>
                 <th class="text-center">စဥ်</th>
                 <th class="text-center">ရက်စွဲ</th>
@@ -319,6 +319,7 @@
             <!-- More rows -->
           </tbody>
         </table>
+      </div>
         <?php 
         // Payment Categories, Start Date, End Date
           if(isset($_POST['filter']) && !empty($_POST['start_date']) && !empty($_POST['end_date']) && !empty($_POST['payment_category'])){
@@ -349,7 +350,7 @@
             </tr>
           </thead>
         </table>
-      </div>
+
     <?php
     // Total Cash Out Amount Report
       }elseif($_GET['report'] == 'total_cash_out'){
@@ -375,9 +376,9 @@
         $total_cash_outstmt->execute();
         $total_cash_outdatas = $total_cash_outstmt->fetchAll();   
     ?>
-    <div class="table-responsive">
+    <div class="table-responsive scroll mb-3">
         <table class="table table-bordered table-hover align-middle">
-          <thead class="table-light">
+          <thead class="table-light sticky-top">
             <tr>
                 <th class="text-center">စဥ်</th>
                 <th class="text-center">ရက်စွဲ</th>
@@ -410,6 +411,7 @@
             <!-- More rows -->
           </tbody>
         </table>
+      </div>
         <?php 
         // Payment Categories, Start Date, End Date
           if(isset($_POST['filter']) && !empty($_POST['start_date']) && !empty($_POST['end_date']) && !empty($_POST['payment_category'])){
@@ -440,7 +442,6 @@
             </tr>
           </thead>
         </table>
-      </div>
 
       <?php
       // Cash In && Out Amount Report
@@ -466,9 +467,9 @@
           $cash_in_outstmt->execute();
           $cash_in_outdatas = $cash_in_outstmt->fetchall();
         ?>
-        <div class="table-responsive">
+        <div class="table-responsive scroll mb-2">
         <table class="table table-bordered table-hover align-middle">
-          <thead class="table-light">
+          <thead class="table-light sticky-top">
             <tr>
                 <th class="text-center">စဥ်</th>
                 <th class="text-center">ရက်စွဲ</th>
@@ -503,6 +504,7 @@
             <!-- More rows -->
           </tbody>
         </table>
+      </div>
         <?php 
         // Payment Categories, Start Date, End Date
           if(isset($_POST['filter']) && !empty($_POST['start_date']) && !empty($_POST['end_date']) && !empty($_POST['payment_category'])){
@@ -536,18 +538,18 @@
             <tr>
                 <th class="text-center">စုစုပေါင်းငွေအဝင်/အထွက်စာရင်း</th>
                 <th class="text-center" style="width: 150px;"><?php echo $total_cash_indatas['total_in_amt']; ?></th>
-                <th class="text-center" style="width: 150px;"><?php echo $total_cash_outdatas['total_out_amt']; ?></th>
+                <th class="text-center" style="width: 165px;"><?php echo $total_cash_outdatas['total_out_amt']; ?></th>
             </tr>
           </thead>
         </table>
-      </div>
+
       <?php
       // Balance Report  
       }elseif($_GET['report'] == 'balance'){
         ?>
-        <div class="table-responsive">
+        <div class="table-responsive scroll mb-3">
         <table class="table table-bordered table-hover align-middle">
-          <thead class="table-light">
+          <thead class="table-light sticky-top">
             <tr>
                 <th class="text-center" style="width: 150px;">စဥ်</th>
                 <th class="text-center">ရက်စွဲ</th>
@@ -597,6 +599,7 @@
             <!-- More rows -->
           </tbody>
         </table>
+      </div>
         <!-- <?php 
         // Payment Categories, Start Date, End Date
           if(isset($_POST['filter']) && !empty($_POST['start_date']) && !empty($_POST['end_date']) && !empty($_POST['payment_category'])){
@@ -616,7 +619,7 @@
             </tr>
           </thead>
         </table> -->
-      </div>
+
       <?php
       }
       ?>
@@ -637,7 +640,7 @@
             $paymentdatas = $paymentstmt->fetchAll();
             foreach ($paymentdatas as $paymentdata) {
             ?>
-              <option value="<?php echo $paymentdata['id']; ?>" <?php if($paymentdata['id'] == $_SESSION['payment_category']){ echo "selected"; } ?>><?php echo $paymentdata['name']; ?></option>
+              <option value="<?php echo $paymentdata['id']; ?>" <?php if(!empty($_SESSION['payment_category']) && $paymentdata['id'] == $_SESSION['payment_category']){ echo "selected"; } ?>><?php echo $paymentdata['name']; ?></option>
             <?php
             } 
             ?>

@@ -13,7 +13,8 @@
           $amount = $_POST['amount'];
           $inorout = $_POST['inorout'];
           $percentage = $_POST['percentage'];
-
+          $percentage_amt = ($amount / 100) * $percentage;
+          
           if(empty($date)){
             $dateError = "*The date is Required*";
           }
@@ -65,11 +66,6 @@
             }
             $stmt->execute();
             $percentagestmt->execute();
-
-            $percentage_amt = ($amount / 100) * $percentage;
-
-
-
 
             $moredatastmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' AND id > '$id' AND category_id='$category_id'");
             $moredatastmt->execute();

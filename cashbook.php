@@ -1,39 +1,85 @@
 <?php include 'connect.php'; ?>
-      <?php
-      $category_id = $_SESSION['category_id'];
+  <?php
+  $category_id = $_SESSION['category_id'];
 
-      if(isset($_POST['addbalance'])){
-          $date = $_POST['date'];
-          $desc = $_POST['desc'];
-          $amt = $_POST['amt'];
+  // Add Opening Balance
+  if(isset($_POST['addbalance'])){
+      $date = $_POST['date'];
+      $desc = $_POST['desc'];
+      $amt = $_POST['amt'];
 
-          $stmt = $pdo->prepare("INSERT INTO opening_balances (date,description,opening_amt,category_id) VALUES ('$date','$desc','$amt','$category_id')");
-          $query = $stmt->execute();
+      $stmt = $pdo->prepare("INSERT INTO opening_balances (date,description,opening_amt,category_id) VALUES ('$date','$desc','$amt','$category_id')");
+      $query = $stmt->execute();
+  }
+  
+  // Edit Opening Balance
+  if(isset($_POST['editbalance'])){
+      $id = $_POST['up_id'];
+      $date = $_POST['up_date'];
+      $desc = $_POST['up_desc'];
+      $amt = $_POST['up_amt'];
+
+      $stmt = $pdo->prepare("UPDATE opening_balances SET date ='$date', description ='$desc', opening_amt='$amt' WHERE id='$id'");
+      $query = $stmt->execute();
+
+      $moredatastmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' AND category_id='$category_id'");
+      $moredatastmt->execute();
+      $moredatas = $moredatastmt->fetchAll();
+      foreach($moredatas as $moredata){
+        $id = $moredata['id'];
+        $date = $moredata['date'];
+        $in_amt = $moredata['in_amt'];
+        $out_amt = $moredata['out_amt'];
+        
+        $datastmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' AND id < '$id' AND category_id='$category_id' ORDER BY id DESC");
+        $datastmt->execute();
+        $datas = $datastmt->fetch(PDO::FETCH_ASSOC);
+        if(!empty($datas)){
+          $currentbalance = $datas['balance'];
+        }else{
+          $currentbalance = $amt;
+        }
+        $balance = ($currentbalance + $in_amt) - $out_amt;
+      
+
+        $stmt = $pdo->prepare("UPDATE cashbook SET balance='$balance' WHERE id='$id' AND category_id='$category_id'");
+        $stmt->execute();
+
+        if($stmt){
+              echo "
+              <script>
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Updated!',
+                      text: 'Transaction Data Updated Successfully',
+                      confirmButtonText: 'Ok'
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          window.location.href = 'cashbook.php';
+                      }
+                  });
+              </script>
+              ";
+            }
       }
 
-        if(isset($_POST['search'])){
-          $search = $_POST['search'];
+  }
 
-          $stmt = $pdo->prepare("SELECT * FROM cashbook WHERE date LIKE '%$search%'");
-          $stmt->execute();
-          $datas = $stmt->fetchall();
-        }else{
-          $date = date('Y-m-d');
-          // $date = '2025-05-25';
+      $date = date('Y-m-d');
+      // $date = '2025-05-25';
 
-          $openingbalancestmt = $pdo->prepare("SELECT * FROM opening_balances WHERE date='$date' AND category_id='$category_id'");
-          $openingbalancestmt->execute();
-          $openingbalancedatas = $openingbalancestmt->fetch(PDO::FETCH_ASSOC);
+      $openingbalancestmt = $pdo->prepare("SELECT * FROM opening_balances WHERE date='$date' AND category_id='$category_id'");
+      $openingbalancestmt->execute();
+      $openingbalancedatas = $openingbalancestmt->fetch(PDO::FETCH_ASSOC);
 
-          $stmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' AND category_id='$category_id'");
-          $stmt->execute();
-          $datas = $stmt->fetchall();
-        }
+      $stmt = $pdo->prepare("SELECT * FROM cashbook WHERE date='$date' AND category_id='$category_id'");
+      $stmt->execute();
+      $datas = $stmt->fetchall();
 
-          $categorystmt = $pdo->prepare("SELECT * FROM payment_categories WHERE id = '$category_id'");
-          $categorystmt->execute();
-          $categorydatas = $categorystmt->fetch(PDO::FETCH_ASSOC);
-       ?>
+      $categorystmt = $pdo->prepare("SELECT * FROM payment_categories WHERE id = '$category_id'");
+      $categorystmt->execute();
+      $categorydatas = $categorystmt->fetch(PDO::FETCH_ASSOC);
+    ?>
     <div class="container mt-5">
       <div class="row pt-2 pb-2">
           <div class="col-8">
@@ -91,8 +137,37 @@
             <td></td>
             <td class="text-center"><?php if(!empty($openingbalancedatas)){ echo $openingbalancedatas['opening_amt']; } ?></td>
             <td></td>
-            <td></td>
+            <td class="text-center">
+              <button style="border: none; background-color: transparent; color: blue; text-decoration: underline;" data-bs-toggle="modal" data-bs-target="#editOpeningBalance">ပြင်ရန်</button>
+              <a href="delete.php?id=<?php echo $openingbalancedatas['id']; ?>&date=<?php echo $openingbalancedatas['date']; ?>&table=opening_balance">ဖျက်ရန်</a>
+            </td>
           </tr>
+          <!-- modal -->
+          <div class="modal fade" id="editOpeningBalance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">အဖွင့်ငွေပမာဏပြင်ရန်</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="" method="post">
+                  <input type="hidden" name="up_id" class="form-control" value="<?php echo $openingbalancedatas['id']; ?>">
+                  <label for="" class="h6">ရက်စွဲ</label>
+                  <input type="date" name="up_date" class="form-control" value="<?php echo $openingbalancedatas['date']; ?>">
+                  <label for="" class="h6 mt-3 mb-2">အကြောင်းအရာ</label>
+                  <input type="text" name="up_desc" class="form-control" value="<?php echo $openingbalancedatas['description']; ?>">
+                  <label for="" class="h6 mt-3 mb-2">ငွေပမာဏ</label>
+                  <input type="text" name="up_amt" class="form-control" value="<?php echo $openingbalancedatas['opening_amt']; ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="editbalance" class="btn btn-primary">Save changes</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
           <?php
           $no = 2;
           foreach ($datas as $data){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2025 at 03:06 PM
+-- Generation Time: May 29, 2025 at 03:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -57,7 +57,9 @@ INSERT INTO `cashbook` (`id`, `date`, `description`, `in_amt`, `out_amt`, `balan
 (64, '2025-05-27', 'Got Pocket Money', 50000, 0, 70000, 1, '2025-05-28 11:09:13'),
 (65, '2025-05-27', 'dfdsfsdfsd', 13000, 0, 83000, 1, '2025-05-28 11:09:27'),
 (66, '2025-05-27', 'Found Change', 6000, 0, 89000, 1, '2025-05-28 11:09:35'),
-(67, '2025-05-27', 'Buy Book', 0, 20000, 69000, 1, '2025-05-28 11:09:48');
+(67, '2025-05-27', 'Buy Book', 0, 20000, 69000, 1, '2025-05-28 11:09:48'),
+(68, '2025-05-29', 'To Transfer my brother', 30000, 0, 32000, 2, '2025-05-29 13:33:18'),
+(69, '2025-05-29', 'To buy a new shirt', 0, 10000, 22000, 2, '2025-05-29 13:33:18');
 
 -- --------------------------------------------------------
 
@@ -81,7 +83,8 @@ INSERT INTO `opening_balances` (`id`, `date`, `description`, `opening_amt`, `cat
 (6, '2025-05-27', 'Opening Balance For 27-5-25', 35000, 3),
 (7, '2025-05-25', 'Opening Balance For 25-5-25', 100000, 3),
 (8, '2025-05-26', 'Opening Balance For 26-5-25', 30000, 1),
-(9, '2025-05-27', 'Opening Balance For 27-5-25', 20000, 1);
+(9, '2025-05-27', 'Opening Balance For 27-5-25', 20000, 1),
+(10, '2025-05-29', 'Opening Balance For 29-5-25', 2000, 2);
 
 -- --------------------------------------------------------
 
@@ -103,7 +106,22 @@ INSERT INTO `payment_categories` (`id`, `name`, `image`) VALUES
 (1, 'KBZ Pay', 'kbz2.jpg'),
 (2, 'WAVE Pay', 'wave.jpg'),
 (3, 'AYA Pay', 'aya.jpg'),
-(4, 'CB Pay', 'cb.png');
+(4, 'CB Pay', 'cb.png'),
+(5, 'Easy Pay', 'easypay.png'),
+(6, 'Trusty Pay', 'trustypay.png'),
+(7, 'UAB Pay', 'uab.jpg'),
+(8, 'True Money', 'truemoney.jpg'),
+(9, 'Shal Pay', 'shalpay.png'),
+(10, 'Mandalay Smart Pay', 'msp.png'),
+(11, 'Ok Pay', 'ok.webp'),
+(12, 'Go pay', 'gopay.png'),
+(13, 'MPT Money', 'mptmoney.png'),
+(14, 'Mytel Pay', 'mytelpay.jpg'),
+(15, 'One Pay', 'onepay.png'),
+(16, 'Ooredoo Pay', 'ooredoo.png'),
+(17, 'Atom', 'atom.png'),
+(18, 'Myan Pay', 'myanpay.png'),
+(19, 'Easy Bills', 'easybill.png');
 
 -- --------------------------------------------------------
 
@@ -141,7 +159,9 @@ INSERT INTO `percentage` (`id`, `date`, `description`, `percentage`, `percentage
 (30, '2025-05-27', 'Got Pocket Money', 3, 1500, 'in', 1, 64),
 (31, '2025-05-27', 'dfdsfsdfsd', 3, 390, 'in', 1, 65),
 (32, '2025-05-27', 'Found Change', 3, 180, 'in', 1, 66),
-(33, '2025-05-27', 'Buy Book', 3, 600, 'out', 1, 67);
+(33, '2025-05-27', 'Buy Book', 3, 600, 'out', 1, 67),
+(34, '2025-05-29', 'To Transfer my brother', 5, 1500, 'in', 2, 68),
+(35, '2025-05-29', 'To buy a new shirt', 3, 300, 'out', 2, 69);
 
 --
 -- Indexes for dumped tables
@@ -179,25 +199,25 @@ ALTER TABLE `percentage`
 -- AUTO_INCREMENT for table `cashbook`
 --
 ALTER TABLE `cashbook`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `opening_balances`
 --
 ALTER TABLE `opening_balances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `payment_categories`
 --
 ALTER TABLE `payment_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `percentage`
 --
 ALTER TABLE `percentage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
