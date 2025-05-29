@@ -122,13 +122,13 @@ if(isset($_POST['addpayment'])){
 
             foreach($datas as $data){
         ?> 
-            <div class="col-md-5 col-lg-2 mb-3">
+            <div class="col-md-5 col-lg-1 m-3">
                 <form action="" method="post">
                     <input type="hidden" value="<?php echo $data['id']; ?>" name="category_id">
                     <button class="btn btn-light" type="submit" name="tocashbook">
                         <div class="card shadow-sm text-center mb-1">
                             <div class="card-body">
-                                <div class="" style="width: 100px; height: 100px;">
+                                <div class="" style="width: 50px; height: 50px;">
                                     <img src="images/<?php echo $data['image']; ?>" alt="" width="100%" height="100%" style="object-fit: cover;">
                                 </div>
                             </div>
