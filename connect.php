@@ -8,7 +8,12 @@
   <style>
     .scroll{
       overflow-y: auto;
-      height: 228px;
+      height: 428px;
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
     }
   </style>
 <?php

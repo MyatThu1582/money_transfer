@@ -114,7 +114,7 @@ if(isset($_POST['addpayment'])){
     </div>
 
     <!-- Cards -->
-    <div class="row g-4">
+    <div class="row g-4 ps-5 mt-5">
         <?php 
             $stmt = $pdo->prepare("SELECT * FROM payment_categories ORDER BY id DESC");
             $stmt->execute();
@@ -125,7 +125,7 @@ if(isset($_POST['addpayment'])){
             <div class="col-md-5 col-lg-1 m-3">
                 <form action="" method="post">
                     <input type="hidden" value="<?php echo $data['id']; ?>" name="category_id">
-                    <button class="btn btn-light" type="submit" name="tocashbook">
+                    <button class="btn btn-light" type="submit" name="tocashbook" style="box-shadow: 0px 8px 16px 0px rgba(100,100,0,0.1);">
                         <div class="card shadow-sm text-center mb-1">
                             <div class="card-body">
                                 <div class="" style="width: 50px; height: 50px;">
@@ -133,7 +133,7 @@ if(isset($_POST['addpayment'])){
                                 </div>
                             </div>
                         </div>
-                    <h6 class="card-title"><?php echo $data['name']; ?></h6>
+                    <h6 class="card-title" style="font-size: 12px;"><?php echo $data['name']; ?></h6>
                     </button>
                 </form>
             </div>
